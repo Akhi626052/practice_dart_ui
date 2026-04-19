@@ -318,3 +318,19 @@ No commits yet
 fatal: not a git repository
 
 
+# Delete branch code rong push karne ke baad branch delete karna hai to: but delete nahi hota hai to yah process karo:
+- git branch
+output: * login-feature
+          master
+- git rebase --abort
+output: No rebase in progress?
+- git checkout -f master,main
+output: Switched to branch 'master'
+- git branch -D login-feature
+output: Deleted branch login-feature (was 1234567).
+- git branch
+output: * master
+
+# check project clean hai ya nahi
+- git status
+- 
