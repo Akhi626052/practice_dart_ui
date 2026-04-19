@@ -333,4 +333,10 @@ output: * master
 
 # check project clean hai ya nahi
 - git status
-- 
+# yah dono command ke bad local repository me save ho gaya hai:
+- git add README.md
+- git commit -m "Update README"
+local repository me save ho gaya
+❗ Important baat (most important)
+👉 Abhi tak GitHub pe kuch nahi gaya ❌
+# 
