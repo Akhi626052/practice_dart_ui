@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "507128691022",
+    "project_id": "practice-dart-ui-app",
+    "storage_bucket": "practice-dart-ui-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507128691022:android:41d67dc34c42725aa3c61f",
+        "android_client_info": {
+          "package_name": "com.example.practice_dart_ui"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcqZUaJYWhIwRNEvOtwlWXA1CkLRyj-s0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
