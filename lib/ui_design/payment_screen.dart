@@ -56,6 +56,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
          child: Center(child: Text("This is bottom navigation", style: TextStyle(color: Colors.white),)),
        ),
 
+
+     bottomSheet: Container(
+       color: Colors.blue,width: 200, height: 200,
+     ),
    );
   }
 }
