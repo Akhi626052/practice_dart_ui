@@ -10,7 +10,6 @@ class PyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: PaymentScreen(),
-      // home: MyHomePage(),
     );
   }
 }
@@ -26,201 +25,52 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-          children :[
-            SizedBox(height: 20,),
-            // spread operator
-            ...ls.map((item){
-              return Padding(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: TextField(
-                  decoration: InputDecoration(
-                      labelText: item,
-                      border: OutlineInputBorder()
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+            children : [
+              SizedBox(height: 20,),
+              // spread operator
+              ...ls.map((item){
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        labelText: item,
+                        border: OutlineInputBorder()
+                    ),
                   ),
-                ),
-              );
-            }),
+                );
+              }),
 
-            SizedBox(height: 10,),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 30),
-              height: 45,
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: (){
-                  showModalBottomSheet(context: context,
-                      backgroundColor: Colors.transparent,
-                      isScrollControlled: false,
-                      clipBehavior: Clip.antiAlias,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15)),
-                        // side: BorderSide(
-                        //   width: 2,
-                        //   color: Colors.red
-                        // )
-                      ) ,
-                      builder: (context){
-                        return
-                          Container(
-                            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(width: 1, color: Colors.white)
-                            ),
-                            child: SafeArea(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+              SizedBox(height: 10,),
 
-                                  SizedBox(height: 3,),
-                                  Center(
-                                      child: Container(width: 70,height: 4,
-                                        decoration: BoxDecoration(
-                                            color: Colors.black12,
-                                            borderRadius: BorderRadius.circular(20)
-                                        ),
-                                      )),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 30),
+                height: 45,
+                width: double.infinity,
+                child: ElevatedButton(
 
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                                    child: Text("Tell us why you're not interested",style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold,
-                                      wordSpacing: 2,
-                                    ),),
-                                  ),
+                  onPressed: (){
 
 
-                                  // divider line full width(edge to edge)
-                                  //     Container(width: double.infinity,
-                                  //       // margin: EdgeInsets.symmetric(horizontal: -20),
-                                  //     decoration: BoxDecoration(
-                                  //     border: Border.all(color: Colors.black12, width: 1),
-                                  //     ),
-                                  //     ),
-
-                                  Divider(
-                                    thickness: 4,
-                                    color: Colors.black12,
-                                    height: 4,
-                                  ),
-
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                        children: [
-
-                                          Text("Irrelevant",style: TextStyle(fontSize: 15),),
-                                          Text("Boring",style: TextStyle(fontSize: 15),),
-                                          Text("Too sexual",style: TextStyle(fontSize: 15),),
-                                          Text("Disgusting",style: TextStyle(fontSize: 15),),
-                                          Text("Violent",style: TextStyle(fontSize: 15),),
-                                          Text("Offensive",style: TextStyle(fontSize: 15),),
-                                          Text("Misleading",style: TextStyle(fontSize: 15),),
-
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-
-
-                                ],
-                              ),
-
-                            ),
-                          );
-                      });
-
-                },
+                    mnBottomSheet(context);
 
 
 
-                // onPressed: (){
-                //   showModalBottomSheet(
-                //     context: context,
-                //     backgroundColor: Colors.transparent,
-                //     isScrollControlled: true,
-                //     builder: (context) {
-                //       return SafeArea(
-                //         child: Container(
-                //           margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                //           decoration: const BoxDecoration(
-                //             color: Colors.white,
-                //             borderRadius: BorderRadius.vertical(
-                //               top: Radius.circular(20),
-                //             ),
-                //           ),
-                //           child: Column(
-                //             mainAxisSize: MainAxisSize.min,
-                //             children: [
-                //
-                //               // 🔘 Drag Handle (Instagram style)
-                //               const SizedBox(height: 8),
-                //               Container(
-                //                 height: 4,
-                //                 width: 40,
-                //                 decoration: BoxDecoration(
-                //                   color: Colors.grey.shade300,
-                //                   borderRadius: BorderRadius.circular(10),
-                //                 ),
-                //               ),
-                //
-                //               SizedBox(height: 16),
-                //
-                //               // 🔤 Title
-                //              _buildOptionT("Tell us why you're not interested"),
-                //
-                //               const SizedBox(height: 12),
-                //
-                //               // ➖ Divider (full width)
-                //               const Divider(height: 1, thickness: 1),
-                //
-                //               // 📋 Options List
-                //               _buildOption("Irrelevant"),
-                //               _buildOption("Boring"),
-                //               _buildOption("Too sexual"),
-                //               _buildOption("Disgusting"),
-                //               _buildOption("Violent"),
-                //               _buildOption("Offensive"),
-                //               _buildOption("Misleading"),
-                //
-                //               const SizedBox(height: 10),
-                //             ],
-                //           ),
-                //         ),
-                //       );
-                //     },
-                //   );
-                // },
 
+                     },
 
-                child: Text("Submit Button"),
-                style:  ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)
-                  ),
-                  elevation: 5,
-                  shadowColor: Colors.blue,
-                  side: BorderSide(
-                      color: Colors.black,
-                      width: 2
-                  ),
+                  child: Text("Submit Button"),
+                  style: _buttonStyle(),
 
                 ),
-
               ),
-            ),
-
-
-
-          ]
+            ]
+        ),
       ),
+
+
       bottomNavigationBar: Container(
         height: 50,
         color: Colors.black,
@@ -229,24 +79,101 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
 
 
-      bottomSheet: Container(
-        margin: EdgeInsets.only(bottom: 20),
-        width: 300, height: 200,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.blue,
-        ),
-      ),
-
 
 
     );
   }
 }
 
+
+
+void mnBottomSheet(BuildContext context){
+
+  showModalBottomSheet(context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: false,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15)),
+      ) ,
+      builder: (context){
+
+        return _RepotBottomSheet();
+
+      }
+  );
+}
+class _RepotBottomSheet extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return  Container(
+      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(width: 1, color: Colors.white)
+      ),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 3,),
+            Center(
+                child: Container(width: 70,height: 4,
+                  decoration: BoxDecoration(
+                      color: Colors.black12,
+                      borderRadius: BorderRadius.circular(20)
+                  ),
+                )),
+            _buildOption("Tell us why you're not interested"),
+            Divider(
+              thickness: 4,
+              color: Colors.black12,
+              height: 4,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _buildOptionT("Irrelevant",),
+                    _buildOptionT("Boring"),
+                    _buildOptionT("Too sexual"),
+                    _buildOptionT("Disgusting"),
+                    _buildOptionT("Violent"),
+                    _buildOptionT("Offensive"),
+                    _buildOptionT("Misleading"),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+ButtonStyle _buttonStyle(){
+  return ElevatedButton.styleFrom(
+    padding: EdgeInsets.symmetric(horizontal: 10),
+    backgroundColor: Colors.black,
+    foregroundColor: Colors.white,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5)
+    ),
+    elevation: 1,
+    shadowColor: Colors.blue,
+    side: BorderSide(
+        color: Colors.black,
+        width: 2),
+  );
+}
 Widget _buildOption(String text) {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 14),
+    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
     child: Align(
       alignment: Alignment.centerLeft,
       child: Text(text,
