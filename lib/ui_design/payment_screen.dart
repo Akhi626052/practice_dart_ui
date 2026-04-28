@@ -52,6 +52,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                  showModalBottomSheet(context: context,
                      backgroundColor: Colors.transparent,
                      isScrollControlled: false,
+                     clipBehavior: Clip.antiAlias,
                      shape: RoundedRectangleBorder(
                    borderRadius: BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15)),
                    // side: BorderSide(
@@ -267,4 +268,19 @@ Widget _buildOptionT(String text){
 }
 
 
+// inkwell
+// ✅ When true
+// isScrollControlled: true
+//
+// 👉 Bottom sheet:
+//
+// Full height (almost screen) tak ja sakta hai
+// Keyboard open hone pe adjust hota hai
+//
+// 📱 Use case:
+//
+// Form (login/signup)
+// Large list (ListView)
+// Chat UI
+// Draggable sheet (Instagram/Google Maps style)
 
