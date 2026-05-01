@@ -53,11 +53,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
                   onPressed: (){
 
-
                     mnBottomSheet(context);
-
-
-
 
                      },
 
@@ -84,6 +80,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 }
+
+
+
+
 
 
 
