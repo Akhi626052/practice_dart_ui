@@ -11,14 +11,15 @@ class DBHelper{
   static final String TABLE_NOTE = "note";
   static final String COLUMN_NOTE_TITLE = "title";
   static final String COLUMN_NOTE_DESC = "desc";
+  static final String COLUMN_NOTE_SNO = "s_no";
 
   DBHelper._();
-  static DBHelper getInstance(){
-    return DBHelper._();
-  }
-  DBHelper db = DBHelper.getInstance(); // har bar naya object ban raha hai
+  // static DBHelper getInstance(){
+  //   return DBHelper._();
+  // }
+  // DBHelper db = DBHelper.getInstance(); // har bar naya object ban raha hai
   // class object hai
-  // static final DBHelper getInstance = DBHelper._();
+  static final DBHelper getInstance = DBHelper._();
 
   Future<Database> getDB() async{
     if(myDB != null){
@@ -71,7 +72,7 @@ Future<bool> addNote({ // void
 
 Future<List<Map<String, dynamic>>> getAllNotes() async {
     var db = await getDB();
-    List<Map<String,dynamic>> mData = await db.query(TABLE_NOTE,columns: [COLUMN_NOTE_TITLE]);
+    List<Map<String,dynamic>> mData = await db.query(TABLE_NOTE,); // columns: [COLUMN_NOTE_TITLE]
     return mData;
 }
 
