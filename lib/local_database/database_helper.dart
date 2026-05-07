@@ -37,7 +37,7 @@ class DBHelper{
     // Directory path -> MainPath.
     String dbPath = join(appDir.path,"noteDB.db");
     return await openDatabase(dbPath,onCreate: (db, version){
-      db.execute("create table $TABLE_NOTE(s_no integer primary key autoincrement, title text, desc text)");
+      db.execute("create table $TABLE_NOTE(s_no integer primary key autoincrement, COLUMN_NOTE_TITLE text, COLUMN_NOTE_DESC text)");
     },
     version: 1
     );
