@@ -50,6 +50,19 @@ class _HomePageState extends State<HomePage> {
           leading: Text('${allNotes[index][DBHelper.COLUMN_NOTE_SNO].toString()}'),
           title: Text(allNotes[index][DBHelper.COLUMN_NOTE_TITLE]),
           subtitle: Text(allNotes[index][DBHelper.COLUMN_NOTE_DESC]),
+          trailing: SizedBox(width: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                    onTap: (){
+
+                    },
+                    child: Icon(Icons.edit)),
+                Icon(Icons.delete, color: Colors.red,)
+              ],
+            ),
+          ),
         );
       },
       itemCount: allNotes.length,
@@ -145,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                           descController.clear();
                           Navigator.pop(context);
                          }
-                     
+
                    }, child: Text('Add Note')),
                  ),
                  SizedBox(width: 11,),
