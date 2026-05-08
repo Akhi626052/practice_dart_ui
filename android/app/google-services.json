@@ -12,7 +12,20 @@
           "package_name": "com.example.practice_dart_ui"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "507128691022-91aimp1g5dkb8kaoupmk1kmrkr0k1bqp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.practice_dart_ui",
+            "certificate_hash": "ead5679cc7800c2c8eeed0729f54f3c238d9d31a"
+          }
+        },
+        {
+          "client_id": "507128691022-npot06jh87evb9c781i8el6uit916dg2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBcqZUaJYWhIwRNEvOtwlWXA1CkLRyj-s0"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507128691022-npot06jh87evb9c781i8el6uit916dg2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "507128691022-hj4qj1o00u80ln0vvdsg6fu0rgk5f3qk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.practiceDartUi"
+              }
+            }
+          ]
         }
       }
     }

@@ -40,11 +40,16 @@ dependencies:
   bloc: ^9.2.0
   flutter_bloc: ^9.1.1
   timezone: ^0.10.1
+  # notification - flutter dependency
   flutter_local_notifications: ^19.0.0
   firebase_core: ^4.7.0
   firebase_messaging: ^16.2.0
+  # authentication - firebase dependency
+
   sqflite:
   path_provider: ^2.1.5
+  firebase_auth: ^6.4.0
+  google_sign_in: ^7.2.0
 #  flutter_bloc: ^9.2.0
 
 dev_dependencies:
