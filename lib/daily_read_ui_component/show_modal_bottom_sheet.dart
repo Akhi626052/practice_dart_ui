@@ -122,7 +122,8 @@ class _RepotBottomSheet extends StatelessWidget{
                 child: Container(width: 70,height: 4,
                   decoration: BoxDecoration(
                       color: Colors.black12,
-                      borderRadius: BorderRadius.circular(20)
+                      borderRadius: BorderRadius.circular(20),
+
                   ),
                 )),
             _buildOption("Tell us why you're not interested"),
@@ -156,6 +157,7 @@ class _RepotBottomSheet extends StatelessWidget{
     );
   }
 }
+
 ButtonStyle _buttonStyle(){
   return ElevatedButton.styleFrom(
     padding: EdgeInsets.symmetric(horizontal: 10),

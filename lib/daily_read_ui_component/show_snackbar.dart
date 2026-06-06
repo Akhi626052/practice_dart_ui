@@ -52,12 +52,13 @@ class SnackBarStateApp extends State<SnackBarApp>{
           children: [
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(onPressed: (){
+              child: ElevatedButton(
+           onPressed: (){
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   snackBarAnimationStyle: AnimationStyle(
                     duration: Duration(seconds: 2)
                   ),
-
                   SnackBar(content: Text("This is a snack-bar!"),backgroundColor: Colors.black,
                     action: SnackBarAction(label: "Undo", onPressed: (){
                       
@@ -66,10 +67,12 @@ class SnackBarStateApp extends State<SnackBarApp>{
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5)
                   ),
-
-                  )
+                  ),
                 );
-              },
+
+
+
+           },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
