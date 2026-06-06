@@ -33,7 +33,8 @@ class _StatefullTextField extends State<TextFieldPra>{
   void didUpdateWidget(covariant TextFieldPra oldWidget){
     super.didUpdateWidget(oldWidget);
   }
-  var textController = TextEditingController(),
+  final TextEditingController textController = TextEditingController();
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -69,9 +70,7 @@ class _StatefullTextField extends State<TextFieldPra>{
            //     ),
            // ),
          ),
-         )
-
-
+         ),
         ],
       ),
     );
