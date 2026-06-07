@@ -71,6 +71,29 @@ class _StatefullTextField extends State<TextFieldPra>{
            // ),
          ),
          ),
+
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(width: 1,color: Colors.red)
+            ),
+          ),
+          ElevatedButton(
+            onPressed: (){
+
+            },
+            child: Text("Register"),
+            style: ElevatedButton.styleFrom(
+            side: BorderSide(width: 1,color: Colors.red),
+
+            shape: RoundedRectangleBorder(
+
+              borderRadius: BorderRadius.circular(10),
+              side: BorderSide(width: 1,color: Colors.red),
+
+            ),
+            ),
+            ),
         ],
       ),
     );
