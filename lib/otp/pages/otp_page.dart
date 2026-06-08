@@ -94,6 +94,7 @@ class _OtpPageState extends State<OtpPage> {
         ),
 
         body: GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: (){
             FocusManager.instance.primaryFocus?.unfocus();
           },
