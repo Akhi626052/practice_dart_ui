@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 void main(){
   runApp(MyApp());
 }
@@ -32,6 +34,8 @@ class _TextFieldPraSecondState extends State<TextFieldPraSecond>{
   // TabController           // TabBar control
   // AnimationController     // Animations
  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 @override
 Widget build(BuildContext context){
     return PopScope(
@@ -59,74 +63,152 @@ Widget build(BuildContext context){
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  // TextField(
+                  //   maxLength: 20,
+                  //   buildCounter: (
+                  //       BuildContext context, {
+                  //         required int currentLength,
+                  //         required bool isFocused,
+                  //         required int? maxLength,
+                  //       }) {
+                  //     if (!isFocused) return null;
+                  //
+                  //     return Text('$currentLength/$maxLength');
+                  //   },
+                  // )
+                  SizedBox(height: 10,),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: TextField(
+                      maxLength: 20,
+                        decoration: InputDecoration(counterText: ""),
+                        // isFocused = true
+                      // buildCounter: (BuildContext context,{required int currentLength, required bool isFocused,required int? maxLength}){
+                      //   return null; // Text("$currentLength / $maxLength");
+                      // },
+
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: TextField(
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: (value) {
+                        print("Searching: $value");
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 10,),
                   Container(
                     // height: double.infinity,
                     // width: double.infinity,
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),// only, all
-                    child: TextField(
-                      // readOnly: true,
-                      // enabled: false,
-                      // readOnly: true,
-                      // showCursor: false,
-                      undoController: undoController,
-                      // scrollPadding: ,
-                      // scrollPhysics: ,
-                      maxLines: 5,
-                      scrollController: _scrollController,
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),
-                      enabled: true,
-                      autofocus: false, // true
-                      cursorColor: Colors.black,
-              
-                      onChanged: (value){
-                        print("Value changed: $value");
-                      },
-                      onTap: (){
-                        print("object11111");
-                      },
-                      autocorrect: true,
-                      onTapOutside: (_){
-                        FocusScope.of(context).unfocus();
-                        // FocusManager.instance.primaryFocus?.unfocus();
-                      },
-                      textDirection: TextDirection.ltr,//rtl
-                      smartDashesType: SmartDashesType.enabled,
-                      textAlign: TextAlign.start,
-              
-                      // keyboardType: TextInputType.text,
-                      keyboardType: TextInputType.multiline,
-                      textInputAction: TextInputAction.newline,// done, Done, Next, Search, Send, Go, // next, search, send, go, newline
-                      autofillHints: [AutofillHints.email],
-                      showCursor: true, // curser visible or not
-                      key: ValueKey("textfield1"),
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 1, color: Colors.red,
-                          )
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 1, color: Colors.red
+                    child: SizedBox(height: 100,
+                      child: TextField(
+                        dragStartBehavior: DragStartBehavior.down,//start
+                        keyboardAppearance: Brightness.light,
+                       onTapUpOutside:  ,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(10),
+                        ],
+
+
+
+                        canRequestFocus: true, // TextField pe tap karne se keyboard open nahi hoga
+                        clipBehavior: Clip.hardEdge, //1. antiAlias,2. none 3.antiAliasWithSaveLayer,  TextField ke content ko clip karega, cut kar de ga direct
+                        controller: _controller,
+                        cursorErrorColor: Colors.red,
+                        cursorColor: Colors.black,
+
+                        focusNode: _focusNode,
+                        mouseCursor: SystemMouseCursors.click,
+                         groupId: "textfield_group",
+                         cursorOpacityAnimates: true,// Opacity animate hogi (smooth blink)
+                        cursorHeight: 20,
+                        cursorWidth: 2,
+                        cursorRadius: Radius.circular(30),
+                        onSubmitted: (value){
+                          print("Submitted value: $value");
+                        },
+
+                         // obscureText: false,
+                        // contextMenuBuilder:
+                        // contentInsertionConfiguration:
+                        // readOnly: true,
+                        // enabled: false,
+                        // readOnly: true,
+                        // showCursor: false,
+
+                        expands: true, // TextField ap-ne parent ki available height ko poo-ra fill kare-ga..// expands ke sa-th minLines and maxLines li-kha-na pare ga.
+                        maxLines: null,
+                        minLines: null,
+                        textAlignVertical: TextAlignVertical.top,
+                        // ignorePointers: true,
+                        //
+                        // maxLines: 5,
+                        // minLines: 5,
+                        // maxLength: ,
+                        undoController: undoController,
+                        // scrollPadding: ,
+                        // scrollPhysics: ,
+                        // scrollPadding: ,
+                        scrollController: _scrollController,
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),
+                        enabled: true,
+                        autofocus: false, // true
+                        onChanged: (value){
+                          print("Value changed: $value");
+                        },
+                        onTap: (){
+                          print("object11111");
+                        },
+                        autocorrect: true,
+                        onTapOutside: (_){
+                          FocusScope.of(context).unfocus();
+                          // FocusManager.instance.primaryFocus?.unfocus();
+                        },
+                        textDirection: TextDirection.ltr,//rtl
+                        smartDashesType: SmartDashesType.enabled,
+                        textAlign: TextAlign.start,
+                        // keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.multiline,
+                        textInputAction: TextInputAction.newline,// done, Done, Next, Search, Send, Go, // next, search, send, go, newline
+                        autofillHints: [AutofillHints.email],
+                        showCursor: true, // curser visible or not
+                        key: ValueKey("textfield1"),
+                        decoration: InputDecoration(
+                          // errorText: "Invalid Error",
+
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1, color: Colors.red,
+                            )
                           ),
-                          borderRadius: BorderRadius.circular(10)
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            width: 1, color: Colors.black
-                          )
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 1, color: Colors.blue
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1, color: Colors.red
+                            ),
+                            borderRadius: BorderRadius.circular(10)
                           ),
-                          borderRadius: BorderRadius.circular(10)
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              width: 1, color: Colors.black
+                            )
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1, color: Colors.blue
+                            ),
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+
                         ),
-              
+
                       ),
-              
                     ),
                   ),
               
@@ -146,12 +228,14 @@ Widget build(BuildContext context){
                     child: Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
                       child: TextFormField(
+                        cursorErrorColor: Colors.pink,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Name is required";
                           }
                           return null;
                         },
+
                         decoration: InputDecoration(
                           errorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -178,6 +262,17 @@ Widget build(BuildContext context){
                         ),
                       ),
                       ),
+                  ),
+                  SizedBox(height: 20,),
+                  Container(
+                    // width: 120,
+                    // height: 120,
+                    clipBehavior: Clip.antiAliasWithSaveLayer, // none/antiAlias/antiAliasWithSaveLayer/hardEdge
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: Image.asset("assets/images/awesome.png",fit: BoxFit.cover,),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                   SizedBox(height: 20,),
                   Container(
