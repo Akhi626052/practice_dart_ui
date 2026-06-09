@@ -17,21 +17,21 @@ class TextFieldPraSecond extends StatefulWidget{
   State<TextFieldPraSecond> createState() => _TextFieldPraSecondState();
 }
 class _TextFieldPraSecondState extends State<TextFieldPraSecond>{
-  final ScrollController _controller = ScrollController();
+  // final ScrollController _controller = ScrollController();
+  final UndoHistoryController undoController = UndoHistoryController();
+  final ScrollController _scrollController = ScrollController();
   @override
   void dispose() {
-    _controller.dispose();
-    super.dispose();
+    _scrollController.dispose();
+     undoController.dispose();
+     super.dispose();
   }
   // TextEditingController   // TextField text control
   // ScrollController        // Scrolling control
   // PageController          // PageView control
   // TabController           // TabBar control
   // AnimationController     // Animations
-
-
-
-
+ final _formKey = GlobalKey<FormState>();
 @override
 Widget build(BuildContext context){
     return PopScope(
@@ -41,6 +41,7 @@ Widget build(BuildContext context){
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: true,// overflow error ke li-ya
         appBar: AppBar(
           backgroundColor: Colors.black,
           title: Text("Practice Only Ui"),
@@ -54,54 +55,155 @@ Widget build(BuildContext context){
 
         ),
         body:
-
-
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),// only, all
-                  child: TextField(
-                    autofocus: true,
-                    cursorColor: Colors.black,
-                    keyboardType: TextInputType.text,
-                    onChanged: (value){
-                      print("Value changed: $value");
-                    },
-                    onTap: (){
-                      print("object11111");
-                    },
-                    autocorrect: true,
-                    // enabled: false,
-                    // readOnly: true,
-                    // showCursor: false,
-                    onTapOutside: (_){
-                      FocusScope.of(context).unfocus();
-                      // FocusManager.instance.primaryFocus?.unfocus();
-                    },
-                    textDirection: TextDirection.ltr,//rtl
-                    smartDashesType: SmartDashesType.enabled,
-                    textAlign: TextAlign.start,
-                    textInputAction: TextInputAction.done,// Done, Next, Search, Send, Go, // next, search, send, go, newline
-                    autofillHints: [AutofillHints.email],
-                    showCursor: false,
-                    scrollController: _controller,
-                    key: ValueKey("textfield1"),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1, color: Colors.red,
-                        )
-                      )
-
+            SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    // height: double.infinity,
+                    // width: double.infinity,
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),// only, all
+                    child: TextField(
+                      // readOnly: true,
+                      // enabled: false,
+                      // readOnly: true,
+                      // showCursor: false,
+                      undoController: undoController,
+                      // scrollPadding: ,
+                      // scrollPhysics: ,
+                      maxLines: 5,
+                      scrollController: _scrollController,
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),
+                      enabled: true,
+                      autofocus: false, // true
+                      cursorColor: Colors.black,
+              
+                      onChanged: (value){
+                        print("Value changed: $value");
+                      },
+                      onTap: (){
+                        print("object11111");
+                      },
+                      autocorrect: true,
+                      onTapOutside: (_){
+                        FocusScope.of(context).unfocus();
+                        // FocusManager.instance.primaryFocus?.unfocus();
+                      },
+                      textDirection: TextDirection.ltr,//rtl
+                      smartDashesType: SmartDashesType.enabled,
+                      textAlign: TextAlign.start,
+              
+                      // keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.multiline,
+                      textInputAction: TextInputAction.newline,// done, Done, Next, Search, Send, Go, // next, search, send, go, newline
+                      autofillHints: [AutofillHints.email],
+                      showCursor: true, // curser visible or not
+                      key: ValueKey("textfield1"),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1, color: Colors.red,
+                          )
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1, color: Colors.red
+                          ),
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            width: 1, color: Colors.black
+                          )
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1, color: Colors.blue
+                          ),
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+              
+                      ),
+              
                     ),
                   ),
-                ),
-              ],
+              
+                  Row(
+                    children: [
+                      IconButton(onPressed: (){
+                        undoController.undo();
+                      }, icon: Icon(Icons.undo)),
+                      IconButton(onPressed: (){
+                        undoController.redo();
+                      }, icon: Icon(Icons.redo)),
+                    ],
+                  ),
+                  SizedBox(height: 20,),
+                  Form(
+                    key: _formKey,
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Name is required";
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                              width: 2,),),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 2, color: Colors.green),
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              width: 2, color: Colors.black
+                            ),
+                          ),
+                          // border: OutlineInputBorder( // di-fault color ke li-ya
+                          //   borderSide: BorderSide(width: 1,color: Colors.brown),
+                          //   borderRadius: BorderRadius.circular(10)
+                          // ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(width: 1, color: Colors.brown),
+                          ),
+                        ),
+                      ),
+                      ),
+                  ),
+                  SizedBox(height: 20,),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 80),
+                    child: ElevatedButton(
+                      onPressed: (){
+                      if(_formKey.currentState!.validate()){
+                        print("Form is valid");
+                      }else{
+                        print("Form is invalid");
+                      }
+                    }, child: Text("Submit"),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.black,
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(width: 1, color: Colors.black)
+                      ),
+                    ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-
-
       ),
     );
 }
