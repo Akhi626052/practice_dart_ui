@@ -5,7 +5,6 @@ void main(){
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -81,5 +80,87 @@ class _ParentScreenState extends State<ParentScreen> {
         ],
       ),
     );
+  }
+}
+
+// Advance Case
+
+
+void mains(){
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: ParentScreen(),
+  ));
+}
+
+class ParentScreen extends StatefulWidget{
+  const ParentScreen({super.key});
+State<ParentScreen> createState() => StateParentScreen();
+}
+
+class StateParentScreen extends State<ParentScreen>{
+  int userId = 1;
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Did Update Widget Example"),
+      ),
+      body: Column(
+        children: [
+
+           UserProfile(userId: userId),
+          SizedBox(height: 20,),
+          ElevatedButton(onPressed: (){
+
+            setState(() {
+              userId = 2;
+            });
+          }, child: Text("Load User 2"))
+
+          
+        ],
+      ),
+    );
+  }
+}
+
+
+class UserProfile extends  StatefulWidget {
+  final int userId;
+  UserProfile({super.key, required this.userId});
+  State<UserProfile> createState() => StateUserProfile();
+}
+class StateUserProfile extends State<UserProfile>{
+  String userName = "";
+  @override
+  void initState(){
+    super.initState();
+    print("initState");
+    fetchUserData();
+  }
+  void fetchUserData(){
+    print("Fetching User: ${widget.userId}");
+    if(widget.userId == 1){
+      userName = "Akhilesh Gupta";
+    }else if(widget.userId == 2){
+      userName = "Rahul Sharma";
+    }
+    setState(() {});
+  }
+  @override
+  void didUpdateWidget(covariant UserProfile oldWidget){
+    super.didUpdateWidget(oldWidget);
+    print("didUpdateWidget");
+    if(oldWidget.userId != widget.userId){
+      print("UserId Changed");
+      fetchUserData();
+    }
+  }
+  @override
+  Widget build(BuildContext context){
+    print("Build");
+    return Text("User ID: ${widget.userId} \n Name: ${userName}",style: TextStyle(color: Colors.black,fontSize: 18, fontWeight: FontWeight.bold),);
+
   }
 }
