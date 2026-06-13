@@ -23,6 +23,10 @@ class _TextFieldPraSecondState extends State<TextFieldPraSecond>{
   final UndoHistoryController undoController = UndoHistoryController();
   final ScrollController _scrollController = ScrollController();
   @override
+  void initState(){
+     super.initState();
+  }
+  @override
   void dispose() {
     _scrollController.dispose();
      undoController.dispose();
@@ -45,6 +49,7 @@ Widget build(BuildContext context){
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
+
         resizeToAvoidBottomInset: true,// overflow error ke li-ya
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -60,6 +65,7 @@ Widget build(BuildContext context){
         ),
         body:
             SingleChildScrollView(
+              scrollDirection: Axis.vertical,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -81,7 +87,7 @@ Widget build(BuildContext context){
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     child: TextField(
                       maxLength: 20,
-                        decoration: InputDecoration(counterText: ""),
+                      decoration: InputDecoration(counterText: ""),
                         // isFocused = true
                       // buildCounter: (BuildContext context,{required int currentLength, required bool isFocused,required int? maxLength}){
                       //   return null; // Text("$currentLength / $maxLength");
@@ -108,7 +114,20 @@ Widget build(BuildContext context){
                       child: TextField(
                         dragStartBehavior: DragStartBehavior.down,//start
                         keyboardAppearance: Brightness.light,
-                       onTapUpOutside:  ,
+
+                     //     Release event detect karna.
+                     //   onTapUpOutside:  (event){
+                     //     FocusScope.of(context).unfocus();
+                     //     print("Keyboard closed");
+                     //   },
+                        // onTapOutside
+                        // Keyboard hide karna:
+                        onTapOutside: (_){
+                          FocusScope.of(context).unfocus();
+                          // FocusManager.instance.primaryFocus?.unfocus();
+                        },
+
+
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(10),
@@ -132,7 +151,6 @@ Widget build(BuildContext context){
                         onSubmitted: (value){
                           print("Submitted value: $value");
                         },
-
                          // obscureText: false,
                         // contextMenuBuilder:
                         // contentInsertionConfiguration:
@@ -140,7 +158,6 @@ Widget build(BuildContext context){
                         // enabled: false,
                         // readOnly: true,
                         // showCursor: false,
-
                         expands: true, // TextField ap-ne parent ki available height ko poo-ra fill kare-ga..// expands ke sa-th minLines and maxLines li-kha-na pare ga.
                         maxLines: null,
                         minLines: null,
@@ -161,14 +178,12 @@ Widget build(BuildContext context){
                         onChanged: (value){
                           print("Value changed: $value");
                         },
+                        onTapAlwaysCalled: true,
                         onTap: (){
-                          print("object11111");
+                          print("TextField tapped");
                         },
+                        selectionControls: ,
                         autocorrect: true,
-                        onTapOutside: (_){
-                          FocusScope.of(context).unfocus();
-                          // FocusManager.instance.primaryFocus?.unfocus();
-                        },
                         textDirection: TextDirection.ltr,//rtl
                         smartDashesType: SmartDashesType.enabled,
                         textAlign: TextAlign.start,
@@ -180,7 +195,6 @@ Widget build(BuildContext context){
                         key: ValueKey("textfield1"),
                         decoration: InputDecoration(
                           // errorText: "Invalid Error",
-
                           contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
