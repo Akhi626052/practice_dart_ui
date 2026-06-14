@@ -109,10 +109,9 @@ class StateParentScreen extends State<ParentScreen>{
       body: Column(
         children: [
 
-           UserProfile(userId: userId),
+          UserProfile(userId: userId),
           SizedBox(height: 20,),
           ElevatedButton(onPressed: (){
-
             setState(() {
               userId = 2;
             });
