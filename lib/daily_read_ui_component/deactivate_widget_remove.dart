@@ -23,9 +23,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Deactivate Example"),centerTitle: true,backgroundColor: Colors.black,
-        titleTextStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 20
-
-      ),
+        titleTextStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
         foregroundColor: Colors.white,
       ),
       body: Column(
@@ -40,7 +38,6 @@ class _HomePageState extends State<HomePage> {
                   });
                 },
                 child: const Text("Show / Hide"),
-
               ),
             ),
 
@@ -56,7 +53,6 @@ class _HomePageState extends State<HomePage> {
 
 class MyChildWidget extends StatefulWidget {
   const MyChildWidget({super.key});
-
   @override
   State<MyChildWidget> createState() => _MyChildWidgetState();
 }
