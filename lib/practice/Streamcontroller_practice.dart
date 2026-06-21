@@ -44,7 +44,8 @@ class _MyAppState extends State<MyApp>{
     return Scaffold(
       body: Column(
         children: [
-        StreamBuilder<int>(stream: controller.stream, builder: (context, snapshot){
+        StreamBuilder<int>(stream: controller.stream,
+        builder: (context, snapshot){
           if(snapshot.hasData){
             return Text("Stream data: ${snapshot.data}");
           } else {

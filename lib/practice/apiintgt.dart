@@ -25,7 +25,7 @@ class _DataShowState extends State<DataShow> {
     list = user.entries.toList();
     getStringData();
   }
-  void getData() async {
+void getData() async {
 
     try{
 
@@ -41,6 +41,17 @@ class _DataShowState extends State<DataShow> {
         print("aaaaaaaaaaaaaaaaaaaaaa: ${data["title"]}");
 
       }
+
+      // List<Map<String, dynamic>> data =
+      // List<Map<String, dynamic>>.from(jsonDecode(response.body)); --
+
+      // ya--- List<dynamic> data = jsonDecode(response.body);
+
+      // [
+      //   {"name": "Akhilesh"},
+      //   {"name": "Rahul"}
+      // ]
+
       else{
         print("Server error${response.statusCode}");
       }
@@ -59,8 +70,6 @@ class _DataShowState extends State<DataShow> {
     }
 
   }
-
-
 
 void getMapData(){
     // 1. Basic Map Example
@@ -158,6 +167,13 @@ void getMapData(){
 
 
 }
+
+
+
+
+
+
+
 
 void getListData(){
 List<String> dataList = ["Flutter","Dart","React Native", "Java", "Python"];
@@ -310,9 +326,6 @@ void listPractice() {
 
   }
 
-
-
-
   void getStringData(){
   String text = " Flutter is awesome";
   print(text.length); // length
@@ -418,6 +431,7 @@ realExample();
 //     substring(), indexOf()
 
   }
+
 bool isValidEmail(String email){
     return email.contains("@") && email.contains(".") && email.trim().isNotEmpty;
 }
