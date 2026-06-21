@@ -49,9 +49,17 @@ class MyCounterAppState extends State<MyCounterApp>{
           ConstrainedBox(
               constraints: BoxConstraints(
                 maxWidth: 800,
-                minWidth: MediaQuery.of(context).size.height
+                minWidth: MediaQuery.of(context).size.height,
               ),
-              child: ElevatedButton(onPressed: increment, child: Text("Button",style: TextStyle(fontSize: 22),)))
+              child: ElevatedButton(onPressed: increment, child: Text("Button",style: TextStyle(fontSize: 22),))),
+
+          SizedBox(height: 40,),
+          
+
+
+
+
+
 
 
 
