@@ -32,9 +32,14 @@ class MyCounterAppState extends State<MyCounterApp>{
     });
 
   }
+  void decrement(){
+    setState(() {
+      count--;
+    });
+  }
   @override
   Widget build(BuildContext context){
-
+    print(("Build Execute"));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -51,16 +56,29 @@ class MyCounterAppState extends State<MyCounterApp>{
                 maxWidth: 800,
                 minWidth: MediaQuery.of(context).size.height,
               ),
-              child: ElevatedButton(onPressed: increment, child: Text("Button",style: TextStyle(fontSize: 22),))),
+              child: ElevatedButton(onPressed: increment, child: Text("Button Increment",style: TextStyle(fontSize: 22),))),
 
           SizedBox(height: 40,),
-          
 
 
 
+          ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 800,
+                minWidth: MediaQuery.of(context).size.height,
+              ),
+              child: ElevatedButton(
 
+                  onPressed: (){
+                    if(count > 0){
+                      decrement();
+                    }
 
+                  },
 
+                  child: Text("Button decrement",style: TextStyle(fontSize: 22),))),
+
+                  SizedBox(height: 40,),
 
 
         ],

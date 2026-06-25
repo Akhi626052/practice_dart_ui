@@ -7,7 +7,6 @@ class ApiService {
   // void getData() async{
   Future<List<TodoModel>>  getData() async {
     var response = await http.get(Uri.parse("https://jsonplaceholder.typicode.com/todos/"));
-
     if(response.statusCode == 200){
       // var data = response.body;
       // String data = response.body;
@@ -67,18 +66,12 @@ class ApiService {
 //  {"title":"C"}
 // ]
       return todoList;
-
-
       print("Hello Words ${jsonDt[0]["title"]}---- -");
     }else{
-
       print("error-------------------------------");
       throw Exception("Failed to load data");
-
     }
   }
-
-
   // Future<UserModel> getUser() async {
   //   final response = await http.get(
   //     Uri.parse('https://api.example.com/user'),
@@ -88,8 +81,5 @@ class ApiService {
   //     jsonDecode(response.body),
   //   );
   // }
-
-
-
 
 }

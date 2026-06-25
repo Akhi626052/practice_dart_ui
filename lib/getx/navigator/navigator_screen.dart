@@ -58,6 +58,23 @@ class HomeScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text("Welcome screen"),
+        backgroundColor: Colors.orange,
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: (){
+            // Navigator.pop(context);
+            Get.back();
+          },icon: Icon(Icons.keyboard_backspace),
+        ),
+        titleSpacing: 10,
+        actions: [
+          // Icon(Icons.more_vert)
+
+        ],
+      ),
       body: Column(
         children: [
 
