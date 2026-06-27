@@ -9,8 +9,6 @@ class MyApp extends StatelessWidget{
       // routes: {
       //   '/login': (context) => LoginScreen()
       // },
-
-
       debugShowCheckedModeBanner: false,
       home: WillPopScopeDemo(),
     );
@@ -25,45 +23,68 @@ class WillPopScopeDemo extends StatefulWidget {
 }
 
 class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
+
+  Future<bool> willPopDialog() async{
+     return await showDialog(context: context, builder: (context){
+      return AlertDialog(
+        title: Text("Confirm"),
+        content: Text("would you like to go back"),
+        actions: [
+          TextButton(onPressed: (){
+            Navigator.pop(context);
+          }, child: Text("No")),
+          TextButton(onPressed: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context){
+
+              return WillPopScopeDemo();
+
+            }));
+          }, child: Text("Yes")),
+        ],
+      );
+    });
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: WillPopScope(
-        onWillPop: (){
-          return Future.value(true);
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+    return WillPopScope(
+      // onWillPop: () async{
+      //   return Future.value(res);
+      // },
+      onWillPop: willPopDialog,
+      child: Scaffold(
+        body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  width: double.infinity,
+                  child: ElevatedButton(onPressed: (){
 
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                width: double.infinity,
-                child: ElevatedButton(onPressed: (){
+                  }, child: Text("   Button  ",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    shadowColor: Colors.yellow,
+                    alignment: Alignment.center,
+                    elevation: 10,
+                    side: BorderSide(
+                      width: 1, color: Colors.black,
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.white,
 
-
-                }, child: Text("   Button  ",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
                   ),
-                  shadowColor: Colors.yellow,
-                  alignment: Alignment.center,
-                  elevation: 10,
-                  side: BorderSide(
-                    width: 1, color: Colors.black,
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
-
-
                 ),
-                ),
-              ),
 
-          ],
-        ),
+            ],
+          ),
+
       ),
     );
   }
