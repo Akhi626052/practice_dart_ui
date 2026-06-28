@@ -46,7 +46,6 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
 
   }
 
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
