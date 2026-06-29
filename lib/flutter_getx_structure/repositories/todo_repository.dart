@@ -9,8 +9,7 @@ class TodoRepository {
   Future<List<TodoModel>> getTodos() async {
     final data = await apiService.fetchTodos();
 
-    return data
-        .map<TodoModel>(
+    return data.map<TodoModel>(
           (json) => TodoModel.fromJson(json),
     )
         .toList();

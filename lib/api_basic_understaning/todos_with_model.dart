@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -45,13 +44,15 @@ class _TodoAppFlState extends State<TodoAppFl> {
 
     if(response.statusCode == 200){
       // var data = response.body;
-      String data = response.body;
+      String data = response.body; // data me ye String store hogi:  '{"name":"Akhilesh","age":25,"city":"Indore"}'
+      print(data.runtimeType); // string,  '{"name":"Akhilesh","age":25,"city":"Indore"}'
       Map<String, dynamic> jsonDt = jsonDecode(data);
+      // jsonDt ak map bana gaya hai:    {name: Akhilesh, age: 25, city: Indore}
+      print("data print: ---------------------------------${jsonDt.runtimeType}"); // Map<String, dynamic>
       // jsonDecode() ek JSON object return kar raha hai, jo is API ke case me:
       // Dart khud type infer kar leta hai.(var)
       // TodoModel todo = TodoModel.fromJson(jsonDt);
       setState(() {
-
         todo = TodoModel.fromJson(jsonDecode(response.body));
       });
       print("Hello Words ${jsonDt["title"]}---- -");
